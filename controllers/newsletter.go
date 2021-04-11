@@ -19,6 +19,18 @@ func SignUpForNewsletter(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	exists, err := database.Database.NewsletterEmailExists(context.Background(), r.FormValue("email"))
+
+	if err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
+
+	if exists {
+		w.WriteHeader(http.StatusOK)
+		return
+	}
+
 	signUpDoc.Email = r.FormValue("email")
 
 	if err := database.Database.Insert("newsletter", context.Background(), signUpDoc); err != nil {

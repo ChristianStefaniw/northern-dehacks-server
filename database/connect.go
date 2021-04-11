@@ -31,7 +31,7 @@ func Connect() *db {
 		log.Fatal(err)
 	}
 
-	db := &db{Ndh: client.Database(constants.DATABASE)}
+	db := &db{ndh: client.Database(constants.DATABASE)}
 	Database = db
 
 	return db
