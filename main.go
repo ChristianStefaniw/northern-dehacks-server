@@ -1,8 +1,7 @@
 package main
 
 import (
-	"github.com/ChristianStefaniw/cgr"
-
+	"github.com/ChristianStefaniw/cgr-v2"
 	"github.com/northern-dehacks/northern-dehacks-server/controllers"
 	"github.com/northern-dehacks/northern-dehacks-server/database"
 	"github.com/northern-dehacks/northern-dehacks-server/helpers"
@@ -21,8 +20,8 @@ func main() {
 	corsMiddleware := cgr.NewMiddleware(middleware.CorsMiddleware)
 
 	router.Route("/").Handler(controllers.Home).Method("GET").Insert()
-	router.Route("/newsletter").Handler(controllers.SignUpForNewsletter).Method("POST", "OPTIONS").HandlePreflight(true).Assign(corsMiddleware).Insert()
-	router.Route("/contact").Handler(controllers.Contact).Method("POST", "OPTIONS").HandlePreflight(true).Assign(corsMiddleware).Insert()
+	router.Route("/newsletter").Handler(controllers.SignUpForNewsletter).Method("POST", "OPTIONS").HandlePreflight().Assign(corsMiddleware).Insert()
+	router.Route("/contact").Handler(controllers.Contact).Method("POST", "OPTIONS").HandlePreflight().Assign(corsMiddleware).Insert()
 
 	router.Run(port)
 }
